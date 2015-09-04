@@ -85,6 +85,12 @@
 # [*directory*]
 #   Set the VHost directory used for the <Directory> directive
 #
+# [*directory_order*]
+#   Set the directory's Order
+#
+# [*directory_allow_from*]
+#   Set the directory's Allow from
+#
 # [*directory_options*]
 #   Set the directory's Options
 #
@@ -158,7 +164,16 @@ define apache::vhost (
   $directory_allow_override     = 'None',
   $directory_require            = '',
   $aliases                      = '',
-  $proxy_aliases                = ''
+  $proxy_aliases                = '',
+  $wsgi_application_group      = undef,
+  $wsgi_daemon_process         = undef,
+  $wsgi_daemon_process_options = undef,
+  $wsgi_import_script          = undef,
+  $wsgi_import_script_options  = undef,
+  $wsgi_process_group          = undef,
+  $wsgi_script_aliases         = undef,
+  $wsgi_pass_authorization     = undef,
+  $wsgi_chunked_request        = undef,
 ) {
 
   $ensure = $enable ? {
