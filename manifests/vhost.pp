@@ -153,6 +153,8 @@ define apache::vhost (
   $enable                       = true,
   $directory                    = '',
   $directory_options            = '',
+  $directory_order              = '',
+  $directory_allow_from         = '',
   $directory_allow_override     = 'None',
   $directory_require            = '',
   $aliases                      = '',
