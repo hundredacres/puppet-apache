@@ -164,16 +164,18 @@ define apache::vhost (
   $directory_allow_override     = 'None',
   $directory_require            = '',
   $aliases                      = '',
+  $headers                      = undef,
+  $request_headers              = undef,
   $proxy_aliases                = '',
-  $wsgi_application_group      = undef,
-  $wsgi_daemon_process         = undef,
-  $wsgi_daemon_process_options = undef,
-  $wsgi_import_script          = undef,
-  $wsgi_import_script_options  = undef,
-  $wsgi_process_group          = undef,
-  $wsgi_script_aliases         = undef,
-  $wsgi_pass_authorization     = undef,
-  $wsgi_chunked_request        = undef,
+  $wsgi_application_group       = undef,
+  $wsgi_daemon_process          = undef,
+  $wsgi_daemon_process_options  = undef,
+  $wsgi_import_script           = undef,
+  $wsgi_import_script_options   = undef,
+  $wsgi_process_group           = undef,
+  $wsgi_script_aliases          = undef,
+  $wsgi_pass_authorization      = undef,
+  $wsgi_chunked_request         = undef,
 ) {
 
   $ensure = $enable ? {
@@ -186,6 +188,21 @@ define apache::vhost (
   $bool_passenger_high_performance   = any2bool($passenger_high_performance)
   $bool_passenger_rack_auto_detect   = any2bool($passenger_rack_auto_detect)
   $bool_passenger_rails_auto_detect  = any2bool($passenger_rails_auto_detect)
+
+  if $wsgi_script_aliases {
+    validate_hash($wsgi_script_aliases)
+  }
+  if $wsgi_daemon_process_options {
+    validate_hash($wsgi_daemon_process_options)
+  }
+  if $wsgi_import_script_options {
+    validate_hash($wsgi_import_script_options)
+  }
+
+  # Check if mod_headers is required to process $headers/$request_headers
+  if $headers or $request_headers {
+      apache::module { 'headers': }
+  }
 
   $real_docroot = $docroot ? {
     ''      => "${apache::data_dir}/${name}",
