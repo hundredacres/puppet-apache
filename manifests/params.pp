@@ -117,6 +117,12 @@ class apache::params {
     default                   => '',
   }
 
+  if $::osfamily == 'RedHat' {
+    $wsgi_socket_prefix = '/var/run/wsgi'
+  } else {
+    $wsgi_socket_prefix = undef
+  }
+
   $port = '80'
   $ssl_port = '443'
   $protocol = 'tcp'
