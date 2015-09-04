@@ -1,5 +1,6 @@
 # The WSGI Apache module configuration file is being
 # managed by Puppet an changes will be overwritten.
+LoadModule wsgi_module modules/mod_wsgi.so
 <IfModule mod_wsgi.c>
   <%- if @wsgi_socket_prefix -%>
   WSGISocketPrefix <%= @wsgi_socket_prefix %>
