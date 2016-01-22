@@ -478,7 +478,7 @@ class apache (
 
 
   ### Service monitoring, if enabled ( monitor => true )
-  if $apache::monitor_tool {
+  if $apache::bool_monitor {
     monitor::port { "apache_${apache::protocol}_${apache::port}":
       protocol => $apache::protocol,
       port     => $apache::port,
