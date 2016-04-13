@@ -139,6 +139,8 @@ define apache::vhost (
   $port                         = '80',
   $ip_addr                      = '*',
   $ssl                          = false,
+  $ssl_cert                     = undef,
+  $ssl_key                      = undef,
   $template                     = 'apache/virtualhost/vhost.conf.erb',
   $source                       = '',
   $priority                     = '50',
