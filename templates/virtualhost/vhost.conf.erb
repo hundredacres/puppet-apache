@@ -119,4 +119,11 @@
     ProxyPassReverse <%= @proxy_aliases %>
 <% end -%>
 <% end -%>
+<% if @ssl -%>
+
+  ## SSL directives
+  SSLEngine on
+  SSLCertificateFile      "<%= @ssl_cert %>"
+  SSLCertificateKeyFile   "<%= @ssl_key %>"
+<% end -%>
 </VirtualHost>

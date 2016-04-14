@@ -18,6 +18,12 @@
 # [*ssl*]
 #   Set to true to enable SSL for this Virtual Host
 #
+# [*ssl_cert*]
+#   Path to SSL cert
+#
+# [#ssl_key*]
+#   Path to SSL key
+#
 # [*template*]
 #   Specify a custom template to use instead of the default one
 #   The value will be used in content => template($template)
